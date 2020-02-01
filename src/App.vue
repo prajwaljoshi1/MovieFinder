@@ -1,18 +1,25 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <div class="search-panel">
+        <MovieInput/>
+        <MovieList/>
+      </div>
+      <div class="details-panel">
+        <MovieDetails/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MovieInput from './components/MovieInput.vue';
+import MovieList from './components/MovieList.vue';
+import MovieDetails from './components/MovieDetails.vue';
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
+  components: { MovieInput, MovieList, MovieDetails }
 }
 </script>
 
@@ -23,6 +30,31 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+
 }
+
+.container {
+  display: flex;
+  margin: 60px;
+}
+
+.search-panel {
+  background-color: orangered;
+  flex: 0 0 30%;
+}
+
+.details-panel {
+  background-color: limegreen;
+  flex: 1;
+}
+
+
+
+
+
+
+
+
+
+
 </style>
