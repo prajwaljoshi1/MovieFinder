@@ -1,6 +1,14 @@
 <template>
-  <div class="hello">
-    <h1>{{selectedMovieId}}</h1>
+  <div class="moviedetails">
+    <h1 class="moviedetails__title">{{movieDetails.Title}}</h1>
+    <div class="moviedetails__title">{{movieDetails.Genre}}</div>
+    <p class="moviedetails__plot">Movie plot - {{movieDetails.Plot}}</p>
+    <div class="moviedetails__language"><span>Language: </span>{{movieDetails.Language}}</div>
+    <div class="moviedetails__actors"><span>Actors: </span>{{movieDetails.Actors}}</div>
+    <div class="moviedetails__duration"><span>Duration: </span>{{movieDetails.Runtime}}</div>
+    <div class="moviedetails__poster">
+      <img :src="movieDetails.Poster" :alt="movieDetails.Title">
+    </div>
   </div>
 </template>
 
@@ -12,17 +20,16 @@ export default {
   },
   data() {
     return {
-
+        movieDetails: {},
     };
   },
-  methods: {
-    async searchMovie(movieName){
-      let response = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=971470b1&s=${movieName}&type=movie&page=${this.pageNumber}`);
+  watch: {
+    async selectedMovieId(id){
+      console.log('id ', id);  // eslint-disable-line
+      let response = await fetch(`http://www.omdbapi.com/?apikey=971470b1&i=${id}&type=movie&plot=full`);
       let data = await response.json();
       if (data.Response === 'True') {
-        this.searchResult = data.Search;
-        this.totalResults = data.totalResults;
-        console.log(data, this.searchResult);  // eslint-disable-line
+        this.movieDetails = data;
       } else {
         console.log("ERROR!", JSON.stringify(data));  // eslint-disable-line
       }
