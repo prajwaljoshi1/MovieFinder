@@ -3,10 +3,11 @@
     <div class="container">
       <div class="search-panel">
         <movie-input v-on:movieTitleChange="searchMovie" />
-        <movie-list/>
+        <movie-list v-on:movieSelected="setSelectedMovie" :searchResult="searchResult" />
+        <pagination />
       </div>
       <div class="details-panel">
-        <movie-details/>
+        <movie-details  :selectedMovieId="selectedMovieId" />
       </div>
     </div>
   </div>
@@ -16,16 +17,17 @@
 import MovieInput from './components/MovieInput.vue';
 import MovieList from './components/MovieList.vue';
 import MovieDetails from './components/MovieDetails.vue';
+import Pagination from './components/Pagination.vue';
 
 export default {
   name: 'app',
-  components: { MovieInput, MovieList, MovieDetails },
+  components: { MovieInput, MovieList, MovieDetails, Pagination },
   data() {
     return {
-      selectedMovie: null,
+      selectedMovieId: '',
       searchResult: [],
       totalResults: 0,
-      pageNumber: 1
+      pageNumber: 1,
     }
   },
   methods: {
@@ -33,12 +35,15 @@ export default {
       let response = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=971470b1&s=${movieName}&type=movie&page=${this.pageNumber}`);
       let data = await response.json();
       if (data.Response === 'True') {
-        this.searchResult = data.search;
+        this.searchResult = data.Search;
         this.totalResults = data.totalResults;
-        console.log(data);  // eslint-disable-line
+        console.log(data, this.searchResult);  // eslint-disable-line
       } else {
-        console.log("ERROR!");  // eslint-disable-line
+        console.log("ERROR!", JSON.stringify(data));  // eslint-disable-line
       }
+    },
+    setSelectedMovie(id) {
+      this.selectedMovieId = id;
     }
   }
 }
@@ -74,26 +79,20 @@ html {
 .container {
   display: flex;
   margin: 5rem 2.5rem;
-  border: 2px solid grey;
+  border: 2px solid #333;
   border-radius: 4px;
 }
 
 .search-panel {
-  flex: 0 0 30%;
-  border-right: 2px solid grey;;
+  flex: 0 0 25%;
+  border-right: 2px solid #333;;
   padding: 5rem 2.5rem;
+  min-height: 90vh;
 }
 
 .details-panel {
   flex: 1;
 }
-
-
-
-
-
-
-
 
 
 

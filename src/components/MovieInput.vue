@@ -14,6 +14,7 @@ export default {
   },
   watch: {
     movieName(newVal, oldVal) {
+      newVal = newVal.trim();
       if (newVal.length > 1 && newVal !== oldVal) {
         this.$emit("movieTitleChange", newVal);
       }
@@ -30,7 +31,7 @@ export default {
     color: #333;
     width: 100%;
     padding: 2rem 2rem;
-    border: 2px solid grey;
+    border: 2px solid  #333;
     border-radius: 8px;
   }
 }
