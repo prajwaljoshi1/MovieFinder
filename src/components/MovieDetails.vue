@@ -8,7 +8,7 @@
 export default {
   name: 'MovieDetails',
   props: {
-    msg: String
+    movieName: String,
   }
 }
 </script>

@@ -1,18 +1,37 @@
 <template>
-  <div class="hello">
-    <h1>Movie Input</h1>
+  <div class="movieinput">
+   <input   v-model.lazy="movieName" class="movieinput__input" type="text" placeholder="Search movies">
   </div>
 </template>
 
 <script>
 export default {
   name: 'MovieInput',
-  props: {
-    msg: String
+  data() {
+      return {
+          movieName: ''
+      };
+  },
+  watch: {
+    movieName(newVal, oldVal) {
+      if (newVal.length > 1 && newVal !== oldVal) {
+        this.$emit("movieTitleChange", newVal);
+      }
+    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+
+<style lang="scss">
+.movieinput {
+  &__input {
+    font-size: 2rem;
+    color: #333;
+    width: 100%;
+    padding: 2rem 2rem;
+    border: 2px solid grey;
+    border-radius: 8px;
+  }
+}
 </style>
