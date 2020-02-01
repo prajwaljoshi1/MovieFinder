@@ -42,7 +42,7 @@ export default {
   }
 
   &__item {
-    border: 2px solid #333;
+    border: 2px solid #111;
     margin: 0.2rem;
     padding: .5rem 1rem;
     position: relative;

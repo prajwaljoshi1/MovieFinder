@@ -1,6 +1,6 @@
 <template>
   <div class="movieinput">
-   <input   v-model.lazy="movieName" class="movieinput__input" type="text" placeholder="Search movies">
+   <input v-model.lazy="movieName" class="movieinput__input" type="text" placeholder="Search movies">
   </div>
 </template>
 
@@ -28,10 +28,10 @@ export default {
 .movieinput {
   &__input {
     font-size: 2rem;
-    color: #333;
+    color: #111;
     width: 100%;
     padding: 2rem 2rem;
-    border: 2px solid  #333;
+    border: 2px solid  #111;
     border-radius: 8px;
   }
 }

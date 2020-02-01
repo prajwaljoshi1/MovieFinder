@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     async searchMovie(movieName){
-      let response = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=971470b1&s=${movieName}&type=movie&page=${this.pageNumber}`);
+      let response = await fetch(`http://www.omdbapi.com/?apikey=971470b1&s=${movieName}&type=movie&page=${this.pageNumber}`);
       let data = await response.json();
       if (data.Response === 'True') {
         this.searchResult = data.Search;
@@ -78,14 +78,14 @@ html {
 
 .container {
   display: flex;
-  margin: 5rem 2.5rem;
-  border: 2px solid #333;
+  margin: 2.5rem;
+  border: 2px solid #111;
   border-radius: 4px;
 }
 
 .search-panel {
   flex: 0 0 25%;
-  border-right: 2px solid #333;;
+  border-right: 2px solid #111;;
   padding: 5rem 2.5rem;
   min-height: 90vh;
 }
