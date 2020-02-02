@@ -52,6 +52,7 @@ export default {
         console.log("ERROR!", JSON.stringify(data));  // eslint-disable-line
         this.hasSearchError = true;
         this.searchErrorMsg = data.Error;
+        this.showPagination = false;
       }
     },
     pageChange(pageNumber){
