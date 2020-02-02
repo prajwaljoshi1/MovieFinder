@@ -3,11 +3,11 @@
     <div class="container">
       <div class="search-panel">
         <movie-input v-on:movieTitleChange="searchMovie" />
-        <movie-list v-on:movieSelected="setSelectedMovie" :searchResult="searchResult" />
-        <pagination />
+        <movie-list  class="search-panel__movie-list" v-on:movieSelected="setSelectedMovie" :searchResult="searchResult" />
+        <pagination v-if="showPagination" :totalResults="totalResults" :pageNumber="pageNumber" v-on:pageChange="pageChange"/>
       </div>
       <div class="details-panel">
-        <movie-details  :selectedMovieId="selectedMovieId" />
+        <movie-details :selectedMovieId="selectedMovieId" />
       </div>
     </div>
   </div>
@@ -25,9 +25,11 @@ export default {
   data() {
     return {
       selectedMovieId: '',
+      lastSearchedMovieName: '',
       searchResult: [],
       totalResults: 0,
       pageNumber: 1,
+      showPagination: false
     }
   },
   methods: {
@@ -35,12 +37,19 @@ export default {
       let response = await fetch(`http://www.omdbapi.com/?apikey=971470b1&s=${movieName}&type=movie&page=${this.pageNumber}`);
       let data = await response.json();
       if (data.Response === 'True') {
+        this.lastSearchedMovieName = movieName;
         this.searchResult = data.Search;
         this.totalResults = data.totalResults;
+        this.showPagination = data.totalResults > 10 
+
         console.log(data, this.searchResult);  // eslint-disable-line
       } else {
         console.log("ERROR!", JSON.stringify(data));  // eslint-disable-line
       }
+    },
+    pageChange(pageNumber){
+      this.pageNumber = pageNumber;
+      this.searchMovie(this.lastSearchedMovieName);
     },
     setSelectedMovie(id) {
       this.selectedMovieId = id;
@@ -86,14 +95,21 @@ html {
 .search-panel {
   flex: 0 0 25%;
   border-right: 2px solid #111;;
-  padding: 5rem 2.5rem;
+  padding: 4rem 2.5rem 1rem 2.5rem;
   min-height: 90vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  &__movie-list {
+    margin-bottom: auto;
+    flex-grow: 1; 
+  }
 }
 
 .details-panel {
   flex: 1;
 }
-
-
 
 </style>

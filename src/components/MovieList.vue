@@ -3,7 +3,7 @@
     <ul class="movielist__list">
       <li  v-for="(item, index) in searchResult" v-bind:key="index" class="movielist__item" v-on:click="selectItem(item)">
         <div class="movielist__item-title">{{item.Title}}</div>
-        <div v-if="item.imdbID === selectedItemImdbId"  class="movielist__item-selected">*</div>
+        <div v-if="item.imdbID === selectedItemImdbId"  class="movielist__item-selected"><star class="svg"/></div>
         <div class="movielist__item-year">{{item.Year}} </div>
       </li>
     </ul>
@@ -11,8 +11,11 @@
 </template>
 
 <script>
+import Star from './icons/Star.vue';
+
 export default {
   name: 'MovieList',
+  components: { Star },
   props: {
     searchResult: Array
   },
@@ -59,12 +62,15 @@ export default {
     font-size: 1.2rem;
     text-align: right;
   }
-  &__item-selected{
+  &__item-selected {
     position: absolute;
     right: 0.5rem;
-    top: -0.5rem;
-    font-size: 5rem;
+    top: .5rem;
     
+  }
+
+  & .svg {
+    fill: #444;
   }
 }
 
