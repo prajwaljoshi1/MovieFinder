@@ -3,8 +3,7 @@
     <button :disabled="disablePrevBtn" class="btn pagination_prev" v-on:click="prev()"> <arrow-left class="svg"/> </button>
     <div class="pagination__info">
         <div class="pagination__number">Page {{pageNumber}}</div>
-        <div class="btn pagination__results">{{totalResults}} results</div>
-        {{disablePrevBtn}}
+        <div class="pagination__results">{{totalResults}} results</div>
     </div>
      <button :disabled="disableNextBtn" class="btn pagination_next" v-on:click="next()"> <arrow-right class="svg"/> </button>
   </div>
@@ -44,9 +43,7 @@ export default {
       this.$emit("pageChange", this.pageNumber + 1);
     },
     prev() {
-      const totalResults = parseInt(this.totalResults);
-      this.disableNextBtn = totalResults/10 - 1 - this.pageNumber <= 0; // Math.floor(totalResults/10) - 1 < this.pageNumber;
-
+      this.disableNextBtn = false;
       this.$emit("pageChange", this.pageNumber - 1);
     }
   }
@@ -60,7 +57,12 @@ export default {
   justify-content: space-between;
 
   &__info {
-    padding-top: 2rem;
+    padding-top: 1.5rem;
+  }
+    &__number,
+    &__results {
+    font-size: 1.2rem;
+    font-weight: 600;
   }
 
   & .svg {

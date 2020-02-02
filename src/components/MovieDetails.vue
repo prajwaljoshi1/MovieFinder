@@ -9,7 +9,7 @@
       <div class="moviedetails__furtherinfo"><span>Duration: </span>{{movieDetails.Runtime}}</div>
     </div>
     <div class="moviedetails__poster">
-      <img  v-if="movieDetails.Poster !== 'N/A'"  height="400px" class="moviedetails__image" :src="movieDetails.Poster" :alt="movieDetails.Title">
+      <img  v-if="movieDetails.Poster !== 'N/A'"  class="moviedetails__image" :src="movieDetails.Poster" :alt="movieDetails.Title">
       <div v-else class="moviedetails__noimage">Image not available.</div>
     </div>
   </div>
@@ -42,30 +42,45 @@ export default {
 
 <style lang="scss">
   .moviedetails {
-    margin: 5rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-apart;
+    @media only screen and (max-width: 900px) {
+      flex-direction: column;
+      justify-content: center;
+    }
 
     &__text{
-      flex: 0 0 60%;
+      flex: 1;
+      width: 60%;
       text-align: left;
+      padding: 0 1rem 0 0;
+
     }
 
     &__title{
-      font-size: 4rem;
+      font-size: 3.5rem;
       font-weight: 800;
+      @media only screen and (max-width: 1100px) {
+        font-size: 2.5rem;
+      }
     }
 
     &__genre {
       font-size: 1.4rem;
       font-weight: 500;
       margin: 2rem 0;
+      @media only screen and (max-width: 1100px) {
+        font-size: 1.2rem;
+      }
     }
 
     &__plot {
       font-size: 1.6rem;
       font-weight: 500;
       margin: 2rem 0;
+      @media only screen and (max-width: 1100px) {
+        font-size: 1.3rem;
+      }
     }
 
     &__furtherinfo{
@@ -74,24 +89,42 @@ export default {
       & span {
         font-weight: 800;
       }
+      @media only screen and (max-width: 1100px) {
+        font-size: 1.3rem;
+      }
     }
 
     &__poster{
-      flex: 0;
+      padding: 0 1rem 0 0;
+      flex: 0 0 40;
       display: flex;
+
+      @media only screen and (max-width: 1200px) {
+       flex: 0 0 50%;
+      }
     }
 
     &__image{
       border: 2px solid #111;
+      max-width:30rem;
+      max-height: 40rem;
+            
+      @media only screen and (max-width: 1100px) {
+        max-width:25rem;
+        max-height: 32rem;
+      }
     }
 
     &__noimage {
-       border: 2px solid #111;
-       height: 40rem;
-       width: 30rem;
-       padding-top: 16rem;
-       font-size: 2rem;
+      border: 2px solid #111;
+      height: 40rem;
+      width: 30rem;
+      padding-top: 16rem;
+      font-size: 2rem;
+      @media only screen and (max-width: 1100px) {
+        max-height:32rem;
+        max-width: 25rem;
+      }
     }
-
   }
 </style>

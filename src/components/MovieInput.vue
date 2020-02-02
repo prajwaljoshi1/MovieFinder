@@ -15,7 +15,7 @@ export default {
   watch: {
     movieName(newVal, oldVal) {
       newVal = newVal.trim();
-      if (newVal.length > 1 && newVal !== oldVal) {
+      if (newVal.length > 0 && newVal !== oldVal) {
         this.$emit("movieTitleChange", newVal);
       }
     }

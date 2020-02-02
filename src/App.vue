@@ -3,11 +3,11 @@
     <div class="container">
       <div class="search-panel">
         <movie-input v-on:movieTitleChange="searchMovie" />
-        <movie-list v-if="!hasSearchError " class="search-panel__movie-list" v-on:movieSelected="setSelectedMovie" :searchResult="searchResult" />
+        <movie-list v-if="!hasSearchError" class="search-panel__movie-list" v-on:movieSelected="setSelectedMovie" :searchResult="searchResult" />
         <div v-else class=" search-panel__error">{{searchErrorMsg}}</div>
         <pagination v-if="showPagination" :totalResults="totalResults" :pageNumber="pageNumber" v-on:pageChange="pageChange"/>
       </div>
-      <div class="details-panel">
+      <div v-show="selectedMovieId.length > 0" class="details-panel">
         <movie-details :selectedMovieId="selectedMovieId" />
       </div>
     </div>
@@ -42,17 +42,18 @@ export default {
       let response = await fetch(`http://www.omdbapi.com/?apikey=971470b1&s=${movieName}&type=movie&page=${this.pageNumber}`);
       let data = await response.json();
       if (data.Response === 'True') {
+        if (this.lastSearchedMovieName !== movieName) {
+          this.selectedMovieId = '';
+        }
         this.lastSearchedMovieName = movieName;
         this.searchResult = data.Search;
         this.totalResults = data.totalResults;
         this.showPagination = data.totalResults > 10 
-
-        console.log(data, this.searchResult);  // eslint-disable-line
       } else {
-        console.log("ERROR!", JSON.stringify(data));  // eslint-disable-line
         this.hasSearchError = true;
         this.searchErrorMsg = data.Error;
         this.showPagination = false;
+        this.selectedMovieId = '';
       }
     },
     pageChange(pageNumber){
@@ -84,6 +85,12 @@ html {
   font-size: 62.5%; //1rem = 10px
 }
 
+body {
+   min-width:400px;        /* Suppose you want minimum width of 1000px */
+   width: auto !important;  /* Firefox will set width as auto */
+   width:400px; 
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -101,10 +108,9 @@ html {
 }
 
 .search-panel {
-  flex: 0 0 25%;
-  border-right: 2px solid #111;;
+  flex: 1 0 auto;
   padding: 4rem 2.5rem 1rem 2.5rem;
-  min-height: 90vh;
+  min-height: 95vh;
 
   display: flex;
   flex-direction: column;
@@ -125,7 +131,9 @@ html {
 }
 
 .details-panel {
-  flex: 1;
+  flex: 0 0 75%;
+  border-left: 2px solid #111;
+  padding: 4rem 4rem 1rem 4rem;
 }
 
 </style>

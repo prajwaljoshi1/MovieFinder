@@ -41,7 +41,7 @@ export default {
 .movielist {
   &__list {
     list-style: none;
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
 
   &__item {
@@ -56,6 +56,10 @@ export default {
     font-weight: 600;
     text-align: left;
     margin-bottom: 1rem;
+    width: 25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__item-year {
@@ -66,7 +70,6 @@ export default {
     position: absolute;
     right: 0.5rem;
     top: .5rem;
-    
   }
 
   & .svg {
