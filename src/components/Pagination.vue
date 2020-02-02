@@ -46,6 +46,10 @@ export default {
   display: flex;
   justify-content: space-between;
 
+  &__info {
+    padding-top: 2rem;
+  }
+
   & .svg {
     fill: #444;
   }

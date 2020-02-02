@@ -1,5 +1,5 @@
 <template>
-  <div class="moviedetails">
+  <div v-if="selectedMovieId.length > 1" class="moviedetails">
     <div class="moviedetails__text">
       <h1 class="moviedetails__title">{{movieDetails.Title}}</h1>
       <div class="moviedetails__genre">{{movieDetails.Genre}}</div>
@@ -9,7 +9,8 @@
       <div class="moviedetails__furtherinfo"><span>Duration: </span>{{movieDetails.Runtime}}</div>
     </div>
     <div class="moviedetails__poster">
-      <img class="moviedetails__image" :src="movieDetails.Poster" :alt="movieDetails.Title">
+      <img  v-if="movieDetails.Poster !== 'N/A'"  height="400px" class="moviedetails__image" :src="movieDetails.Poster" :alt="movieDetails.Title">
+      <div v-else class="moviedetails__noimage">Image not available.</div>
     </div>
   </div>
 </template>
@@ -82,6 +83,14 @@ export default {
 
     &__image{
       border: 2px solid #111;
+    }
+
+    &__noimage {
+       border: 2px solid #111;
+       height: 40rem;
+       width: 30rem;
+       padding-top: 16rem;
+       font-size: 2rem;
     }
 
   }

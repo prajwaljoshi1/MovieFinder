@@ -3,7 +3,8 @@
     <div class="container">
       <div class="search-panel">
         <movie-input v-on:movieTitleChange="searchMovie" />
-        <movie-list  class="search-panel__movie-list" v-on:movieSelected="setSelectedMovie" :searchResult="searchResult" />
+        <movie-list v-if="!hasSearchError " class="search-panel__movie-list" v-on:movieSelected="setSelectedMovie" :searchResult="searchResult" />
+        <div v-else class=" search-panel__error">{{searchErrorMsg}}</div>
         <pagination v-if="showPagination" :totalResults="totalResults" :pageNumber="pageNumber" v-on:pageChange="pageChange"/>
       </div>
       <div class="details-panel">
@@ -26,6 +27,8 @@ export default {
     return {
       selectedMovieId: '',
       lastSearchedMovieName: '',
+      hasSearchError: false,
+      searchErrorMsg: '',
       searchResult: [],
       totalResults: 0,
       pageNumber: 1,
@@ -34,6 +37,8 @@ export default {
   },
   methods: {
     async searchMovie(movieName){
+      this.hasSearchError = false;
+      this.searchErrorMsg = '';
       let response = await fetch(`http://www.omdbapi.com/?apikey=971470b1&s=${movieName}&type=movie&page=${this.pageNumber}`);
       let data = await response.json();
       if (data.Response === 'True') {
@@ -45,6 +50,8 @@ export default {
         console.log(data, this.searchResult);  // eslint-disable-line
       } else {
         console.log("ERROR!", JSON.stringify(data));  // eslint-disable-line
+        this.hasSearchError = true;
+        this.searchErrorMsg = data.Error;
       }
     },
     pageChange(pageNumber){
@@ -103,6 +110,14 @@ html {
   justify-content: flex-start;
 
   &__movie-list {
+    margin-bottom: auto;
+    flex-grow: 1; 
+  }
+
+  &__error {
+    margin-top: 5rem;
+    font-size: 2rem;
+    color: red;
     margin-bottom: auto;
     flex-grow: 1; 
   }
