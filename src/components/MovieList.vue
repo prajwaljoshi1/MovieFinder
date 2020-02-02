@@ -39,6 +39,7 @@ export default {
   background-color: orange;
 }
 .movielist {
+
   &__list {
     list-style: none;
     padding: 3rem 0;
@@ -75,6 +76,7 @@ export default {
   & .svg {
     fill: #444;
   }
+
 }
 
 </style>

@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'MovieDetails',
+  name: 'Moviedetails',
   props: {
     selectedMovieId: String,
   },
@@ -41,12 +41,12 @@ export default {
 </script>
 
 <style lang="scss">
+
   .moviedetails {
     display: flex;
-    justify-content: space-apart;
+    justify-content: space-between;
     @media only screen and (max-width: 900px) {
       flex-direction: column;
-      justify-content: center;
     }
 
     &__text{
@@ -54,7 +54,6 @@ export default {
       width: 60%;
       text-align: left;
       padding: 0 1rem 0 0;
-
     }
 
     &__title{
@@ -95,10 +94,10 @@ export default {
     }
 
     &__poster{
-      padding: 0 1rem 0 0;
-      flex: 0 0 40;
+      padding: 1rem;
+      flex: 1 0 40;
       display: flex;
-
+      // flex-basis: auto;
       @media only screen and (max-width: 1200px) {
        flex: 0 0 50%;
       }
@@ -126,5 +125,6 @@ export default {
         max-width: 25rem;
       }
     }
+
   }
 </style>

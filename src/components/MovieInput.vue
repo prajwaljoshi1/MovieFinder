@@ -25,7 +25,9 @@ export default {
 
 
 <style lang="scss">
+
 .movieinput {
+
   &__input {
     font-size: 2rem;
     color: #111;
@@ -34,5 +36,7 @@ export default {
     border: 2px solid  #111;
     border-radius: 8px;
   }
+  
 }
+
 </style>
