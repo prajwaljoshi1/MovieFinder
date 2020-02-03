@@ -1,36 +1,43 @@
 <template>
   <div class="movielist">
     <ul class="movielist__list">
-      <li  v-for="(item, index) in searchResult" v-bind:key="index" class="movielist__item" v-on:click="selectItem(item)">
+      <li
+        v-for="(item, index) in searchResult"
+        v-bind:key="index"
+        class="movielist__item"
+        v-on:click="selectItem(item)"
+      >
         <div class="movielist__item-title">{{item.Title}}</div>
-        <div v-if="item.imdbID === selectedItemImdbId"  class="movielist__item-selected"><star class="svg"/></div>
-        <div class="movielist__item-year">{{item.Year}} </div>
+        <div v-if="item.imdbID === selectedItemImdbId" class="movielist__item-selected">
+          <star class="svg" />
+        </div>
+        <div class="movielist__item-year">{{item.Year}}</div>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import Star from './icons/Star.vue';
+import Star from "./icons/Star.vue";
 
 export default {
-  name: 'MovieList',
+  name: "MovieList",
   components: { Star },
   props: {
     searchResult: Array
   },
   data() {
     return {
-      selectedItemImdbId: ''
+      selectedItemImdbId: ""
     };
   },
   methods: {
     selectItem(item) {
-      this.selectedItemImdbId  = item.imdbID; 
+      this.selectedItemImdbId = item.imdbID;
       this.$emit("movieSelected", item.imdbID);
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -39,7 +46,6 @@ export default {
   background-color: orange;
 }
 .movielist {
-
   &__list {
     list-style: none;
     padding: 3rem 0;
@@ -48,7 +54,7 @@ export default {
   &__item {
     border: 2px solid #111;
     margin: 0.2rem;
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     position: relative;
   }
 
@@ -70,13 +76,11 @@ export default {
   &__item-selected {
     position: absolute;
     right: 0.5rem;
-    top: .5rem;
+    top: 0.5rem;
   }
 
   & .svg {
     fill: #444;
   }
-
 }
-
 </style>

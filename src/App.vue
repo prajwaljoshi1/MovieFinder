@@ -1,23 +1,32 @@
 <template>
   <div class="app">
-    <search-panel v-show="showSearchPanel" class="app__search-panel" v-on:movieSelected="setSelectedMovie"/>
-    <movie-details v-show="showMovieDetails" class="app__details-panel" :selectedMovieId="selectedMovieId"  v-on:closeDetails="hideMovieDetails"/>
+    <search-panel
+      v-show="showSearchPanel"
+      class="app__search-panel"
+      v-on:movieSelected="setSelectedMovie"
+    />
+    <movie-details
+      v-show="showMovieDetails"
+      class="app__details-panel"
+      :selectedMovieId="selectedMovieId"
+      v-on:closeDetails="hideMovieDetails"
+    />
   </div>
 </template>
 
 <script>
-import SearchPanel from './components/SearchPanel.vue';
-import MovieDetails from './components/MovieDetails.vue';
+import SearchPanel from "./components/SearchPanel.vue";
+import MovieDetails from "./components/MovieDetails.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: { SearchPanel, MovieDetails },
   data() {
     return {
-      selectedMovieId: '',
+      selectedMovieId: "",
       showSearchPanel: true,
       showMovieDetails: false
-    }
+    };
   },
   created() {
     window.addEventListener("resize", this.searchPanalShowHide);
@@ -36,20 +45,21 @@ export default {
       this.showMovieDetails = false;
     },
     searchPanalShowHide(event) {
-      this.showSearchPanel = !(event.target.innerWidth < 750 && this.showMovieDetails);
+      this.showSearchPanel = !(
+        event.target.innerWidth < 750 && this.showMovieDetails
+      );
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-
 * {
   margin: 0;
   padding: 0;
 }
 
-*, 
+*,
 *::before,
 *::after {
   box-sizing: inherit;
@@ -61,18 +71,13 @@ html {
 }
 
 body {
-   min-width:400px;        /* Suppose you want minimum width of 1000px */
-   width: auto !important;  /* Firefox will set width as auto */
-   width:400px; 
-   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
 }
-
 
 .app {
   display: flex;
   margin: 2.5rem;
   border: 2px solid #111;
-  border-radius: 4px;
 
   &__search-panel {
     flex: 1;
@@ -92,5 +97,4 @@ body {
     min-height: 95vh;
   }
 }
-
 </style>

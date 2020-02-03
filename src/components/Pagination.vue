@@ -1,20 +1,24 @@
 <template>
   <div class="pagination">
-    <button :disabled="disablePrevBtn" class="btn pagination_prev" v-on:click="prev()"> <arrow-left class="svg"/> </button>
+    <button :disabled="disablePrevBtn" class="btn pagination_prev" v-on:click="prev()">
+      <arrow-left class="svg" />
+    </button>
     <div class="pagination__info">
-        <div class="pagination__number">Page {{pageNumber}}</div>
-        <div class="pagination__results">{{totalResults}} results</div>
+      <div class="pagination__number">Page {{pageNumber}}</div>
+      <div class="pagination__results">{{totalResults}} results</div>
     </div>
-     <button :disabled="disableNextBtn" class="btn pagination_next" v-on:click="next()"> <arrow-right class="svg"/> </button>
+    <button :disabled="disableNextBtn" class="btn pagination_next" v-on:click="next()">
+      <arrow-right class="svg" />
+    </button>
   </div>
 </template>
 
 <script>
-import ArrowLeft from './icons/ArrowLeft.vue';
-import ArrowRight from './icons/ArrowRight.vue';
+import ArrowLeft from "./icons/ArrowLeft.vue";
+import ArrowRight from "./icons/ArrowRight.vue";
 
 export default {
-  name: 'Pagination',
+  name: "Pagination",
   components: { ArrowLeft, ArrowRight },
   props: {
     totalResults: String,
@@ -24,22 +28,22 @@ export default {
     this.disablePrevBtn = this.pageNumber <= 1;
   },
   data() {
-    return{
+    return {
       disableNextBtn: false,
       disablePrevBtn: false
     };
   },
   watch: {
-    pageNumber(value){
+    pageNumber(value) {
       this.disablePrevBtn = value <= 1;
     }
   },
   methods: {
     next() {
       const totalResults = parseInt(this.totalResults);
-      console.log("total pgnm ", totalResults/10 - 1 - this.pageNumber)// eslint-disable-line
-      this.disableNextBtn = totalResults/10 - 1 - this.pageNumber <= 0;
-      
+      // need to disable the 'next' button  checked at every next click and button is disabled for subsequent time if appliable.
+      this.disableNextBtn = totalResults / 10 - 1 - this.pageNumber <= 0;
+
       this.$emit("pageChange", this.pageNumber + 1);
     },
     prev() {
@@ -47,7 +51,7 @@ export default {
       this.$emit("pageChange", this.pageNumber - 1);
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -58,9 +62,10 @@ export default {
 
   &__info {
     padding-top: 1.5rem;
+    text-align: center;
   }
-    &__number,
-    &__results {
+  &__number,
+  &__results {
     font-size: 1.2rem;
     font-weight: 600;
   }
