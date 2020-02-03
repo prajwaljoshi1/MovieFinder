@@ -4,12 +4,14 @@
       v-show="showSearchPanel"
       class="app__search-panel"
       v-on:movieSelected="setSelectedMovie"
+      v-on:displaySelectedMovieDetails="displaySelectedMovieDetails"
     />
     <movie-details
-      v-show="showMovieDetails"
+      v-show="showMovieDetailsPanel"
       class="app__details-panel"
       :selectedMovieId="selectedMovieId"
       v-on:closeDetails="hideMovieDetails"
+      :showMovieDetailsData="showMovieDetailsData"
     />
   </div>
 </template>
@@ -23,9 +25,10 @@ export default {
   components: { SearchPanel, MovieDetails },
   data() {
     return {
-      selectedMovieId: "",
-      showSearchPanel: true,
-      showMovieDetails: false
+      selectedMovieId: "",           // imdb id of selected movie
+      showSearchPanel: true,         // show searchpanel, hide in mobile devices when details page is shown
+      showMovieDetailsPanel: false,  // show movie details panel, hide when no movie is selected on initial app load
+      showMovieDetailsData: false    //  sho data in moie details, hide when new movie has been searched but no movie is selected from the new list
     };
   },
   created() {
@@ -37,17 +40,21 @@ export default {
   methods: {
     setSelectedMovie(id) {
       this.selectedMovieId = id;
-      this.showMovieDetails = id.length > 0;
+      this.showMovieDetailsPanel = id.length > 0;
       this.showSearchPanel = window.innerWidth >= 750;
+      this.showMovieDetailsData = true;
     },
     hideMovieDetails() {
       this.showSearchPanel = true;
-      this.showMovieDetails = false;
+      this.showMovieDetailsPanel = false;
     },
     searchPanalShowHide(event) {
       this.showSearchPanel = !(
-        event.target.innerWidth < 750 && this.showMovieDetails
+        event.target.innerWidth < 750 && this.showMovieDetailsPanel
       );
+    },
+    displaySelectedMovieDetails(value){
+      this.showMovieDetailsData = value;
     }
   }
 };

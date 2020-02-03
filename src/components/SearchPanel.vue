@@ -30,13 +30,13 @@ export default {
   components: { MovieInput, MovieList, Pagination },
   data() {
     return {
-      lastSearchedMovieName: "",
-      hasSearchError: false,
-      searchErrorMsg: "",
-      searchResult: [],
-      totalResults: 0,
-      pageNumber: 1,
-      showPagination: false
+      lastSearchedMovieName: "",  // name of movie last searched in OMDB, used for app's internal use
+      hasSearchError: false,      // if fetch api errors while searching for movie in omdb
+      searchErrorMsg: "",         // error message from api 
+      searchResult: [],           // list of movie from the api (max 10)
+      totalResults: 0,            // total result for the search in OMDB, comes from api, used in Pagination component
+      pageNumber: 1,              // current page number searched and displayed
+      showPagination: false       // show pagination or not,  show pagination if total movie is more than 10
     };
   },
   methods: {
@@ -49,7 +49,7 @@ export default {
       let data = await response.json();
       if (data.Response === "True") {
         if (this.lastSearchedMovieName !== movieName) {
-          this.selectedMovieId = "";
+          this.$emit("displaySelectedMovieDetails", false);
           this.pageNumber = 1;
         }
         this.lastSearchedMovieName = movieName;
@@ -60,7 +60,7 @@ export default {
         this.hasSearchError = true;
         this.searchErrorMsg = data.Error || 'Something went wrong.';
         this.showPagination = false;
-        this.selectedMovieId = "";
+        this.$emit("displaySelectedMovieDetails", false);
         this.pageNumber = 1;
       }
     },

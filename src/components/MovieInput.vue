@@ -11,7 +11,7 @@ export default {
   name: "MovieInput",
   data() {
     return {
-      movieName: ""
+      movieName: ""      // searched movie name
     };
   },
   watch: {

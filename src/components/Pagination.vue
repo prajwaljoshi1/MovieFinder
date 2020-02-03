@@ -29,8 +29,8 @@ export default {
   },
   data() {
     return {
-      disableNextBtn: false,
-      disablePrevBtn: false
+      disableNextBtn: false,    // disable next btn, when next page is not applicable
+      disablePrevBtn: false     // disable prev btn, when previous page is not applicable
     };
   },
   watch: {

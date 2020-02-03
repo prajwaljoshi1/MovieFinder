@@ -1,23 +1,27 @@
 <template>
-  <div v-if="selectedMovieId.length > 1" class="moviedetails">
+  <div>
     <button class="btn moviedetails__back" v-on:click="closeDetails"><close class="svg" /></button>
-    <div class="moviedetails__text">
-      <h1 class="moviedetails__title">{{movieDetails.Title}}</h1>
-      <div class="moviedetails__genre">{{movieDetails.Genre}}</div>
-      <p class="moviedetails__plot">Movie plot - {{movieDetails.Plot}}</p>
-      <div class="moviedetails__furtherinfo"><span>Language:</span>{{movieDetails.Language}}</div>
-      <div class="moviedetails__furtherinfo"><span>Actors:</span>{{movieDetails.Actors}}</div>
-      <div class="moviedetails__furtherinfo"><span>Duration:</span>{{movieDetails.Runtime}}</div>
+    <div v-if="selectedMovieId.length > 1 && !hasError && showMovieDetailsData" class="moviedetails">
+      <div class="moviedetails__text">
+        <h1 class="moviedetails__title">{{movieDetails.Title}}</h1>
+        <div class="moviedetails__genre">{{movieDetails.Genre}}</div>
+        <p class="moviedetails__plot">Movie plot - {{movieDetails.Plot}}</p>
+        <div class="moviedetails__furtherinfo"><span>Language:</span>{{movieDetails.Language}}</div>
+        <div class="moviedetails__furtherinfo"><span>Actors:</span>{{movieDetails.Actors}}</div>
+        <div class="moviedetails__furtherinfo"><span>Duration:</span>{{movieDetails.Runtime}}</div>
+      </div>
+      <div class="moviedetails__poster">
+        <img
+          v-if="movieDetails.Poster !== 'N/A'"
+          class="moviedetails__image"
+          :src="movieDetails.Poster"
+          :alt="movieDetails.Title"
+        />
+        <div v-else class="moviedetails__noimage">Image not available.</div>
+      </div>
     </div>
-    <div class="moviedetails__poster">
-      <img
-        v-if="movieDetails.Poster !== 'N/A'"
-        class="moviedetails__image"
-        :src="movieDetails.Poster"
-        :alt="movieDetails.Title"
-      />
-      <div v-else class="moviedetails__noimage">Image not available.</div>
-    </div>
+    <div v-if="hasError" class="moviedetails__error">{{errorMessage}}</div>
+      <div v-if="!showMovieDetailsData" class="moviedetails__message">Select a movie from the list to see details.</div>
   </div>
 </template>
 
@@ -29,12 +33,13 @@ export default {
   components: { Close },
   props: {
     selectedMovieId: String,
+    showMovieDetailsData: Boolean,
   },
   data() {
     return {
-      movieDetails: {},
-      hasError: false,
-      errorMessage: ''
+      movieDetails: {},   // object containng result of fetch get movie info         
+      hasError: false,    // fetch api for getting movie info has error
+      errorMessage: ''    // fetch api for getting movie info error message
     };
   },
   watch: {
@@ -48,7 +53,6 @@ export default {
       } else {
         this.hasError = true;
         this.errorMessage = data.Error || 'Something went wrong.';
-
       }
     }
   },
@@ -64,10 +68,9 @@ export default {
 .moviedetails {
   display: flex;
   justify-content: space-between;
-  position: relative;
   @media only screen and (max-width: 900px) {
     flex-direction: column-reverse;
-    // justify-content: flex-start;
+    justify-content: flex-start;
   }
 
   &__text {
@@ -142,6 +145,8 @@ export default {
     width: 30rem;
     padding-top: 16rem;
     font-size: 2rem;
+    display: block;
+    margin: 0 auto;
     @media only screen and (max-width: 1100px) {
       max-height: 32rem;
       max-width: 25rem;
@@ -150,9 +155,9 @@ export default {
 
   &__back {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
-    border-radius: 50%;
+    top: 4rem;
+    right: 4rem;
+    border-radius: 0.8rem;
     background-color: #222;
     padding: 1rem;
     @media only screen and (min-width: 750px) {
@@ -162,6 +167,22 @@ export default {
     & .svg {
       fill: #eee;
     }
+  }
+
+  &__error{
+    text-align: center;
+    margin-top: 5rem;
+    font-size: 2rem;
+    color: red;
+    min-width: 10rem;
+  }
+
+    &__message{
+    text-align: center;
+    margin-top: 5rem;
+    font-size: 2rem;
+    color: #111;
+    min-width: 10rem;
   }
 }
 </style>

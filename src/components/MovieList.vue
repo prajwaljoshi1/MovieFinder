@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      selectedItemImdbId: ""
+      selectedItemImdbId: ""     // imdb id of movie selected from the list
     };
   },
   methods: {
