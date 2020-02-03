@@ -1,20 +1,8 @@
 <template>
-    <div class="app">
-
-      <search-panel
-        v-show="showSearchPanel"
-        class="app__search-panel"
-        v-on:movieSelected="setSelectedMovie"
-      />
-
-      <movie-details 
-        v-show="showMovieDetails"
-        class="app__details-panel"
-        :selectedMovieId="selectedMovieId" 
-        v-on:closeDetails="hideMovieDetails"
-      />
-
-    </div>
+  <div class="app">
+    <search-panel v-show="showSearchPanel" class="app__search-panel" v-on:movieSelected="setSelectedMovie"/>
+    <movie-details v-show="showMovieDetails" class="app__details-panel" :selectedMovieId="selectedMovieId"  v-on:closeDetails="hideMovieDetails"/>
+  </div>
 </template>
 
 <script>
@@ -32,10 +20,10 @@ export default {
     }
   },
   created() {
-    window.addEventListener("resize", this.myEventHandler);
+    window.addEventListener("resize", this.searchPanalShowHide);
   },
   destroyed() {
-    window.removeEventListener("resize", this.myEventHandler);
+    window.removeEventListener("resize", this.searchPanalShowHide);
   },
   methods: {
     setSelectedMovie(id) {
@@ -47,10 +35,9 @@ export default {
       this.showSearchPanel = true;
       this.showMovieDetails = false;
     },
-    myEventHandler(event) {
+    searchPanalShowHide(event) {
       this.showSearchPanel = !(event.target.innerWidth < 750 && this.showMovieDetails);
     }
-    
   }
 }
 </script>

@@ -20,7 +20,7 @@ export default {
       if (newVal.length > 0 && newVal !== oldVal) {
         this.$emit("movieTitleChange", newVal);
       }
-    }, 500)
+    }, 200)
   }
 }
 </script>

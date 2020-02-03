@@ -49,7 +49,7 @@ export default {
     async searchMovie(movieName){
       this.hasSearchError = false;
       this.searchErrorMsg = '';
-      let response = await fetch(`http://www.omdbapi.com/?apikey=971470b1&s=${movieName}&type=movie&page=${this.pageNumber}`);
+      let response = await fetch(`http://www.omdbapi.com/?apikey=${process.env.VUE_APP_OMDB_API_KEY}&s=${movieName}&type=movie&page=${this.pageNumber}`);
       let data = await response.json();
       if (data.Response === 'True') {
         if (this.lastSearchedMovieName !== movieName) {

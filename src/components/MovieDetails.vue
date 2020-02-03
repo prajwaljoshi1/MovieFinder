@@ -32,7 +32,7 @@ export default {
   },
   watch: {
     async selectedMovieId(id){
-      let response = await fetch(`http://www.omdbapi.com/?apikey=971470b1&i=${id}&type=movie&plot=full`);
+      let response = await fetch(`http://www.omdbapi.com/?apikey=${process.env.VUE_APP_OMDB_API_KEY}&i=${id}&type=movie&plot=full`);
       let data = await response.json();
       if (data.Response === 'True') {
         this.movieDetails = data;
