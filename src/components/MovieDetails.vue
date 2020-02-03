@@ -1,5 +1,6 @@
 <template>
   <div v-if="selectedMovieId.length > 1" class="moviedetails">
+    <button class="btn moviedetails__back" v-on:click="closeDetails"><close class="svg"/></button>
     <div class="moviedetails__text">
       <h1 class="moviedetails__title">{{movieDetails.Title}}</h1>
       <div class="moviedetails__genre">{{movieDetails.Genre}}</div>
@@ -16,8 +17,11 @@
 </template>
 
 <script>
+import Close from './icons/Close.vue';
+
 export default {
   name: 'Moviedetails',
+  components: { Close },
   props: {
     selectedMovieId: String,
   },
@@ -36,6 +40,11 @@ export default {
         console.log("ERROR!", JSON.stringify(data));  // eslint-disable-line
       }
     }
+  },
+  methods: {
+    closeDetails() {
+       this.$emit("closeDetails", true);
+    }
   }
 }
 </script>
@@ -45,15 +54,16 @@ export default {
   .moviedetails {
     display: flex;
     justify-content: space-between;
+    position: relative;
     @media only screen and (max-width: 900px) {
-      flex-direction: column;
+      flex-direction: column-reverse;
+      justify-content: flex-start;
+
     }
 
     &__text{
-      flex: 1;
-      width: 60%;
+      flex: 1 1 auto;
       text-align: left;
-      padding: 0 1rem 0 0;
     }
 
     &__title{
@@ -98,8 +108,8 @@ export default {
       flex: 1 0 40;
       display: flex;
       // flex-basis: auto;
-      @media only screen and (max-width: 1200px) {
-       flex: 0 0 50%;
+      @media only screen and (max-width: 900px) {
+       flex: 0;
       }
     }
 
@@ -107,6 +117,8 @@ export default {
       border: 2px solid #111;
       max-width:30rem;
       max-height: 40rem;
+      display: block;
+      margin: 0 auto;
             
       @media only screen and (max-width: 1100px) {
         max-width:25rem;
@@ -115,6 +127,7 @@ export default {
     }
 
     &__noimage {
+      text-align: center;
       border: 2px solid #111;
       height: 40rem;
       width: 30rem;
@@ -126,5 +139,22 @@ export default {
       }
     }
 
+    &__back {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      border-radius: 50%;
+      background-color: #222;
+      padding: 1rem;
+      @media only screen and (min-width: 750px) {
+        display: none;
+      }
+
+
+      & .svg {
+        fill: #eee;
+      }
+    }
+  
   }
 </style>

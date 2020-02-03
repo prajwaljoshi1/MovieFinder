@@ -11,7 +11,7 @@
         v-show="showMovieDetails"
         class="app__details-panel"
         :selectedMovieId="selectedMovieId" 
-        v-on:back="back"
+        v-on:closeDetails="hideMovieDetails"
       />
 
     </div>
@@ -31,14 +31,26 @@ export default {
       showMovieDetails: false
     }
   },
+  created() {
+    window.addEventListener("resize", this.myEventHandler);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.myEventHandler);
+  },
   methods: {
     setSelectedMovie(id) {
       this.selectedMovieId = id;
       this.showMovieDetails = id.length > 0;
+      this.showSearchPanel = window.innerWidth >= 750;
     },
-    back() {
+    hideMovieDetails() {
       this.showSearchPanel = true;
+      this.showMovieDetails = false;
+    },
+    myEventHandler(event) {
+      this.showSearchPanel = !(event.target.innerWidth < 750 && this.showMovieDetails);
     }
+    
   }
 }
 </script>
@@ -86,8 +98,7 @@ body {
   }
 
   &__details-panel {
-    flex: 0 1 75%;
-    // flex-basis: 70rem;
+    flex: 1 1 75%;
     border-left: 2px solid #111;
     padding: 4rem 4rem 1rem 4rem;
   }

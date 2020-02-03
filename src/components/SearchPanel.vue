@@ -54,16 +54,18 @@ export default {
       if (data.Response === 'True') {
         if (this.lastSearchedMovieName !== movieName) {
           this.selectedMovieId = '';
+          this.pageNumber = 1;
         }
         this.lastSearchedMovieName = movieName;
         this.searchResult = data.Search;
         this.totalResults = data.totalResults;
-        this.showPagination = data.totalResults > 10 
+        this.showPagination = data.totalResults > 10;
       } else {
         this.hasSearchError = true;
         this.searchErrorMsg = data.Error;
         this.showPagination = false;
         this.selectedMovieId = '';
+        this.pageNumber = 1;
       }
     },
     pageChange(pageNumber){
