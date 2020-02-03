@@ -1,10 +1,13 @@
 <template>
   <div class="movieinput">
-   <input v-model.lazy="movieName" class="movieinput__input" type="text" placeholder="Search movies">
+   <input v-model="movieName" class="movieinput__input" type="text" placeholder="Search movies">
   </div>
 </template>
 
 <script>
+
+import debounce from '@/helpers/debounce.js';
+
 export default {
   name: 'MovieInput',
   data() {
@@ -13,12 +16,11 @@ export default {
       };
   },
   watch: {
-    movieName(newVal, oldVal) {
-      newVal = newVal.trim();
+    movieName: debounce( function (newVal, oldVal) {
       if (newVal.length > 0 && newVal !== oldVal) {
         this.$emit("movieTitleChange", newVal);
       }
-    }
+    }, 500)
   }
 }
 </script>

@@ -86,7 +86,7 @@ export default {
 
   &__movie-list {
     margin-bottom: auto;
-    flex-grow: 1; 
+    flex: 1; 
   }
 
   &__error {
@@ -94,6 +94,7 @@ export default {
     margin-top: 5rem;
     font-size: 2rem;
     color: red;
+    min-width: 10rem;
   }
 
 }

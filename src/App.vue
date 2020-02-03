@@ -91,6 +91,7 @@ body {
     flex: 1;
     padding: 4rem 2.5rem 1rem 2.5rem;
     min-height: 95vh;
+    min-width: 35rem;
 
     display: flex;
     flex-direction: column;
@@ -101,6 +102,7 @@ body {
     flex: 1 1 75%;
     border-left: 2px solid #111;
     padding: 4rem 4rem 1rem 4rem;
+    min-height: 95vh;
   }
 }
 
