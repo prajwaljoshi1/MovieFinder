@@ -26,6 +26,8 @@ The app has been tested on latest chrome and firefox, has not been tested on tes
 6. Hide pagination when the total number of results is less than the page size 
 7. On a desktop, when a user selects an item in the list, the screen should split to provide a detailed view of the movie. This view should include all content from the list view, plus the movie’s: Poster Long plot Language(s) Actor(s) Duration 
 
+I have tried to meet all requirements above.
+
 
 ### Additional things I added
 
