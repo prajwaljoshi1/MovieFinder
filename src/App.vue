@@ -79,12 +79,16 @@ html {
 
 body {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
+  background: linear-gradient(to top, #00c6ff, #0072ff);
 }
 
 .app {
   display: flex;
   margin: 2.5rem;
-  border: 2px solid #111;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, .8); 
+  color: #444;
 
   &__search-panel {
     flex: 1;
@@ -99,7 +103,7 @@ body {
 
   &__details-panel {
     flex: 1 1 75%;
-    border-left: 2px solid #111;
+    border-left: 2px solid #0072ff;
     padding: 4rem 4rem 1rem 4rem;
     min-height: 95vh;
   }

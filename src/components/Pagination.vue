@@ -71,7 +71,7 @@ export default {
   }
 
   & .svg {
-    fill: #444;
+    fill: #0072ff;
   }
 
   & .btn {

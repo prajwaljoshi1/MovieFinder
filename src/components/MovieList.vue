@@ -42,9 +42,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.selected {
-  background-color: orange;
-}
+
 .movielist {
   &__list {
     list-style: none;
@@ -52,7 +50,7 @@ export default {
   }
 
   &__item {
-    border: 2px solid #111;
+    border: 2px solid #0072ff;
     margin: 0.2rem;
     padding: 0.5rem 1rem;
     position: relative;
@@ -80,7 +78,7 @@ export default {
   }
 
   & .svg {
-    fill: #444;
+    fill: #0072ff;
   }
 }
 </style>

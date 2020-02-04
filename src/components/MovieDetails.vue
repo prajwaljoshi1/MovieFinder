@@ -6,9 +6,9 @@
         <h1 class="moviedetails__title">{{movieDetails.Title}}</h1>
         <div class="moviedetails__genre">{{movieDetails.Genre}}</div>
         <p class="moviedetails__plot">Movie plot - {{movieDetails.Plot}}</p>
-        <div class="moviedetails__furtherinfo"><span>Language:</span>{{movieDetails.Language}}</div>
-        <div class="moviedetails__furtherinfo"><span>Actors:</span>{{movieDetails.Actors}}</div>
-        <div class="moviedetails__furtherinfo"><span>Duration:</span>{{movieDetails.Runtime}}</div>
+        <div class="moviedetails__furtherinfo"><span>Language: </span>{{movieDetails.Language}}</div>
+        <div class="moviedetails__furtherinfo"><span>Actors: </span>{{movieDetails.Actors}}</div>
+        <div class="moviedetails__furtherinfo"><span>Duration: </span>{{movieDetails.Runtime}}</div>
       </div>
       <div class="moviedetails__poster">
         <img
@@ -90,6 +90,7 @@ export default {
     font-size: 1.4rem;
     font-weight: 500;
     margin: 2rem 0;
+    color: #0072ff;
     @media only screen and (max-width: 1100px) {
       font-size: 1.2rem;
     }
@@ -126,7 +127,7 @@ export default {
   }
 
   &__image {
-    border: 2px solid #111;
+    border: 2px solid #666;
     max-width: 30rem;
     max-height: 40rem;
     display: block;
@@ -140,7 +141,7 @@ export default {
 
   &__noimage {
     text-align: center;
-    border: 2px solid #111;
+    border: 2px solid #666;
     height: 40rem;
     width: 30rem;
     padding-top: 16rem;
@@ -181,7 +182,7 @@ export default {
     text-align: center;
     margin-top: 5rem;
     font-size: 2rem;
-    color: #111;
+    color: #444;
     min-width: 10rem;
   }
 }

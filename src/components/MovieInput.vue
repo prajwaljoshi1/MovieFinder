@@ -29,11 +29,12 @@ export default {
 .movieinput {
   &__input {
     font-size: 2rem;
-    color: #111;
+    color: #444;
     width: 100%;
     padding: 2rem 2rem;
-    border: 2px solid #111;
+    border: 2px solid #0072ff;
     border-radius: 8px;
+    background-color: #eee;
   }
 }
 </style>
